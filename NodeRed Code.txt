@@ -1,0 +1,46 @@
+var b=JSON.parse(JSON.stringify(msg.payload));
+b=msg;
+return msg;
+
+msg.payload=msg.payload.Ac;
+return msg;
+
+msg.payload=msg.payload.Hum;
+return msg;
+
+msg.payload=msg.payload.Tem;
+return msg;
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <form method="POST" name="google-sheet">
+        
+        <input type="text" id="Age" name="Age" placeholder="Age">
+        <input type="text" id="Gender" name="Gender" placeholder="Gender">
+      
+        <input type="text" id="Bmi" name="Bmi" placeholder="Bmi">
+        <input type="text" id="Acetone" name="Acetone" value="{{msg.payload.Ac}}">
+        <input type="text" id="Hum" name="Hum" value="{{msg.payload.Hum}}">
+        <input type="text" id="Temp" name="Temp" value="{{msg.payload.Tem}}">
+        <input type="submit" value="Submit" name="submit">
+    </form>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyYpsB7uDagG_NDByr0hbwKYTPdCtW5alRO167051U0TNX0ZlR3V4VfgoOWQw2MEF2E6A/exec'
+        const form = document.forms['google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          
+        })
+    </script>
+</body>
+
+</html>
