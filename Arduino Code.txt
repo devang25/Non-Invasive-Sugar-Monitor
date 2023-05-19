@@ -1,0 +1,22 @@
+#include <dht.h> 
+#define dht_apin A1  
+dht DHT; 
+int gasSensorPin = A0; // analog pin to read the gas sensor
+int sensorValue = 0; // variable to store the sensor reading
+
+void setup() {
+  Serial.begin(9600); // start serial communication
+}
+void loop() {
+  sensorValue = analogRead(gasSensorPin); // read the sensor value
+  DHT.read11(dht_apin); 
+  Serial.print(“Gas Sensor Value: “);
+  Serial.print(1023-sensorValue); // print the sensor value to the serial monitor
+  Serial.print(“ Current humidity = “); 
+  Serial.print(DHT.humidity);
+  Serial.print(“%  “);
+  Serial.print(“temperature = “);
+  Serial.print(DHT.temperature); 
+  Serial.println(“C  “);
+  delay(1000); // wait for 1 second
+}
